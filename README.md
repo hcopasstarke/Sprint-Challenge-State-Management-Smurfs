@@ -22,32 +22,55 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] What problem does the context API help solve?
-- [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
-- [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
-- [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
-- [ ] What is your favorite state management system you've learned and this sprint? Please explain why!
+- [X] What problem does the context API help solve?
+
+It helps solve prop drilling (getting data from one component to another by going through multiple layers of components) by providing a "messaging" pipeline so that you don't have to pass props. It provides a "Provider" that "injects" the dependencies into top-level child components.
+
+- [X] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+The Redux store is where the app's state is stored within a single, immutable object. The store orchestrates activity in Redux (somewhat like the human brain). The state of the app is mutated (changed) by the reducer. A reducer is a JavaScript function, with two parameters, that has logic for mutating the state based on a combination between the action and the payload. The initialState is the first parameter, an action is the second parameter. The action sends a signal to the store to change the state. For example, in a to-do app, the action "ADD_TO_TODO" tells the reducer the reason why it's being called.  To add the payload to the todo's store.
+
+The store is a 'single source of truth' because there is only of it, and only one thing can change it at a time.  From there every piece of state the app relies on inherits from that central store.
+
+- [X] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+The Application state is global and holds the entire state of the application tree and is immutable. The only way to change the application state is to dispatch an action on it. A component state is contained the component that you're dealing with -- it can be initialized in the constructor and then called by setState() when we want to change it. 
+
+It's a good idea to use component state when it only pertains to a component, and changes nowhere else.  Otherwise, it's better to use the Application state.
+
+- [X] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+Redux-thunk is a form of middleware (connects client requests to backend data) that allows you to call action creators that return a function instead of an action object. The function doesn't have to be pure, so it can have side effects like asynchronous API calls. It can also dispatch actions. 
+
+Additionally, you can call other reducers from within thunk and orchestrate a bunch of changes. 
+Ex: if a user clicks a button that needs to change multiple pieces of state after a successful request to the back end, it allows you to wait for that request within the thunk middleware to orchestrate those reducers.
+
+- [X] What is your favorite state management system you've learned and this sprint? Please explain why!
+
+Redux -- it allows us to control state in a sane way from a global state object that allows side effects to happen without having to pass the props via prop drilling.
+
+
 
 ## Project Set Up
 
 Follow these steps to set up your project:
 
-- [ ] `fork & clone` this repository.
-- [ ] `cd` into the forked copy of this repository.
-- [ ] **RUN** `yarn` to retrieve all `server-side` the dependencies.
-- [ ] **RUN** `yarn start` or `npm start` to get your API up and running on `http://localhost:3333`. This is the **URL** you're going to need to use within your React app in order to make AJAX requests for data.
-- [ ] After your API is up and running, you can open chrome and type in `http://localhost:3333/smurfs`. You should see an empty Array `[]` returned to you. This is an array that your **API** will be using to store our Smurf Data.
-- [ ] **LOOK** at your `smurfs` directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
-- [ ] **Open** `src/index.js` to make sure that your app is ready to roll with the proper middleware.
-- [ ] **cd** into `smurfs` and run `yarn` to retrieve the client side dependencies.
-- [ ] **RUN** `yarn start` to fire up your React application. There ought to be a pretty little message awaiting you welcoming you to the app. `Follow` the prompting.
+- [X] `fork & clone` this repository.
+- [X] `cd` into the forked copy of this repository.
+- [X] **RUN** `yarn` to retrieve all `server-side` the dependencies.
+- [X] **RUN** `yarn start` or `npm start` to get your API up and running on `http://localhost:3333`. This is the **URL** you're going to need to use within your React app in order to make AJAX requests for data.
+- [X] After your API is up and running, you can open chrome and type in `http://localhost:3333/smurfs`. You should see an empty Array `[]` returned to you. This is an array that your **API** will be using to store our Smurf Data.
+- [X] **LOOK** at your `smurfs` directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
+- [X] **Open** `src/index.js` to make sure that your app is ready to roll with the proper middleware.
+- [X] **cd** into `smurfs` and run `yarn` to retrieve the client side dependencies.
+- [X] **RUN** `yarn start` to fire up your React application. There ought to be a pretty little message awaiting you welcoming you to the app. `Follow` the prompting.
 
 **LOOK** at all the files you've been given for this project. One important file to note is `server.js`. This file contains an **API** that you are going to be interfacing with. Below is documentation on how to interact with the **API**.
 
 ## Minimum Viable Product
 
-- [ ] Plan and implement how you are going to manage your state for your application
-- [ ] You _must_ use either context or Redux as your state management system
+- [X] Plan and implement how you are going to manage your state for your application
+- [X] You _must_ use either context or Redux as your state management system
 - [ ] Once you have planned out your state management system, fetch data from the smurf server
 - [ ] Add a form to collect info for a new smurf, and make a POST request to the server to add a new smurf to your village
 
